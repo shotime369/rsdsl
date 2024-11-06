@@ -7,22 +7,24 @@
     <link rel="stylesheet" href="indexstyles.css">
 </head>
 <body>
-<script src="indexscript.js"></script>
 <div class="login-container">
     <img src="LVlogo.png" alt="LifeVault Logo" width="200px" height="200px" class="logoindex">
     <h1 class="title">Welcome to Life Vault</h1>
     <form id="login-form">
         <div class="input-group">
             <label for="username">Username</label>
+            <!-- add "required" at the end of the username input type to force the user to fill this in -->
             <input type="text" id="username" name="username">
         </div>
         <div class="input-group">
             <label for="password">Password</label>
+            <!-- add "required" at the end of the password input type to force the user to fill this in -->
             <input type="password" id="password" name="password">
         </div>
         <button type="submit" class="login-button">Login</button>
     </form>
 </div>
+<!-- script for the login form - currently not functional -->
 <script src="indexscript.js"></script>
 </body>
 </html>
