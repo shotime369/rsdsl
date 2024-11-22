@@ -1,0 +1,74 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    padding-top: 60px; /* To account for the fixed navbar */
+}
+
+
+.navbar {
+    position: fixed;
+    top:0;
+    width: 100%;
+    background-color: #ABB1E4;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-left: 10px;
+    margin-right: 200px;
+}
+
+    .navbar a {
+        color: #333;
+        text-decoration: none;
+        padding: 15px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar a:hover {
+        background-color: grey;
+        color: white;
+    }
+
+
+    .content {
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .section p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #555;
+    }
+

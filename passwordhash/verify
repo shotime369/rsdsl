@@ -1,0 +1,14 @@
+<?php
+// The plaintext password entered by the user
+$input_password = "1234";
+
+// The hashed password retrieved from the database (e.g., from the password_hash() function)
+$stored_hashed_password = '$2y$10$i.X1yfsE6IK5Vs7Uf.TtSO9l0BwcN/gmddAYptHskjF/cmtr.Wp2K'; // Example hash
+
+// Verify the password
+if (password_verify($input_password, $stored_hashed_password)) {
+    echo "Password is correct!";
+} else {
+    echo "Invalid password.";
+}
+?>
