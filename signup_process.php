@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Hash the password 
+    // Hash the password - default selects the most up to date hashing algorithm
     $password_hash = password_hash($input_password, PASSWORD_DEFAULT);
 
     // Prepare SQL statement - user_id is set to auto-increment so isn't included
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 
-header("Location: index.php");
+header("Location: index.html");
 exit();
 
   
