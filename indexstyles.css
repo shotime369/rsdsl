@@ -61,3 +61,12 @@ input[type="text"], input[type="password"] {
     background-color: #9CA4E8;
 }
 
+.wave {
+    position: relative; 
+    width: 100%;
+    --mask:
+      radial-gradient(118.51px at 50% 159px,#000 99%,#0000 101%) calc(50% - 106px) 0/212px 100%,
+      radial-gradient(118.51px at 50% -106px,#0000 99%,#000 101%) 50% 53px/212px 100% repeat-x;
+    -webkit-mask: var(--mask);
+            mask: var(--mask);
+  }
