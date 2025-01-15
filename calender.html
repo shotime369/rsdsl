@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar</title>
+  <link rel="stylesheet" href="styleRSDSL.css"> <!-- Updated to use styleRSDSL.css -->
+  <link rel="stylesheet" href="styles.css"> <!-- Retained for calendar-specific styling -->
+</head>
+<body>
+<!-- Navigation Bar -->
+<div class="navbar">
+  <img src="LVlogo.png" alt="LifeVault Logo" width="50px" height="50px">
+  <span class="title">Life Vault</span>
+  <a href="index.html#home">Home</a>
+  <a href="index.html#passwords">Passwords</a>
+  <a class="active-tab" href="#">Calendar</a> <!-- Disabled current page -->
+  <a href="index.html#notes">Notes</a>
+  <a href="index.html#tasks">Tasks</a>
+  <a href="index.html#media">Media</a>
+  <a href="logout.php" class="logout-button">Logout</a>
+</div>
+
+<!-- Calendar Content -->
+<div class="wrapper">
+  <div class="container-calendar">
+    <!-- Left Section -->
+    <div id="left">
+      <h1>Calendar</h1>
+      <div class="button-container-calendar">
+        <button id="previous">&lt;</button>
+        <button id="next">&gt;</button>
+        <select id="monthSelect">
+          <option value="0">Jan</option>
+          <option value="1">Feb</option>
+          <option value="2">Mar</option>
+          <option value="3">Apr</option>
+          <option value="4">May</option>
+          <option value="5">Jun</option>
+          <option value="6">Jul</option>
+          <option value="7">Aug</option>
+          <option value="8">Sep</option>
+          <option value="9">Oct</option>
+          <option value="10">Nov</option>
+          <option value="11">Dec</option>
+        </select>
+      </div>
+      <h2 id="monthAndYear"></h2>
+      <table class="table-calendar">
+        <thead>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+        </thead>
+        <tbody id="calendar-body">
+        <!-- Calendar will be dynamically generated -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Reminder Section -->
+  <div id="reminder-section">
+    <h3>Reminders</h3>
+    <ul id="reminderList">
+      <!-- Reminders will be added dynamically -->
+    </ul>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+

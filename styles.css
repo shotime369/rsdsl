@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f1f9;
+    color: #555;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #e3cce3;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-calendar {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #d76ed7;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #a04ea0;
+    margin-top: 10px;
+}
+
+.button-container-calendar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 5px 15px;
+    border: 2px solid #d76ed7;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #d76ed7;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f3d1f3;
+}
+
+select {
+    font-size: 1.2rem;
+    padding: 5px;
+    border: 2px solid #d76ed7;
+    border-radius: 5px;
+    color: #d76ed7;
+}
+
+.table-calendar {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 1.3rem;
+}
+
+.table-calendar th,
+.table-calendar td {
+    width: 14.28%;
+    height: 80px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #555;
+}
+
+.table-calendar th {
+    background-color: #f3d1f3;
+    font-weight: bold;
+    color: #555;
+}
+
+.table-calendar td {
+    background-color: #fff;
+}
+
+.today {
+    background-color: #d76ed7; /* Highlighting today's box */
+    color: #fff; /* White text for contrast */
+    font-weight: bold;
+    border: 2px solid #a04ea0; /* Add a border to further emphasize */
+}
+
+/* Remove event dots */
+.event-marker {
+    display: none;
+}
+
+#reminder-section {
+    background-color: #f9f1f9;
+    padding: 10px;
+    border: 2px solid #e3cce3;
+    border-radius: 10px;
+    text-align: left;
+}
+
+
