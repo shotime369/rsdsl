@@ -11,7 +11,7 @@
 <?php if (!empty($message)): ?>
 <p class="message"><?= htmlspecialchars($message) ?></p>
 <?php endif; ?>
-<form method="POST" action="">
+<form method="POST" action="saveNote.php">
     <input type="text" name="title" placeholder="Note Title Required" required>
     <textarea name="content" placeholder="Write your note here..." rows="5" required></textarea>
     <button type="submit">Save Note</button>

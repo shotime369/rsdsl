@@ -1,42 +1,47 @@
 <?php
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
 // Database connection settings
 $servername = "localhost";
 $username = "root";
 $password = "P@ssw0rd";
 $dbname = "loginweb";
 
-//try connection
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+// Connect to the database
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// initialize variables
-$message = "";
+// Get form data from notes.html
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    //get timestamp
+    $timestamp = date('Y-m-d H:i:s');
 
-// get user input from form
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'] ?? '';
-    $content = $_POST['content'] ?? '';
+    // Prepare SQL statement - notesID is set to auto-increment so isn't included
+   $stmt = $conn->prepare("INSERT INTO notes (title, content, timestamp) VALUES (?, ?, ?)");
+     $stmt->bind_param("sss", $title, $content, $timestamp);
 
-    if (!empty($title) && !empty($content)) {
-        $timestamp = date('Y-m-d H:i:s');
-
-        // insert into the database title, content, timestamp
-        $stmt = $pdo->prepare("INSERT INTO notes (title, content, date_time) VALUES (:title, :content, :date_time)");
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':date_time', $timestamp);
-
+        // Execute the statement and check for success
         if ($stmt->execute()) {
-            $message = "Note saved successfully!";
-        } else {
-            $message = "Failed to save the note.";
+                $message = "Note saved successfully!";
+            } else {
+                $message = "Failed to save the note: " . $stmt->error;
+            }
+
+            // Close the statement and the connection
+            $stmt->close();
+            $conn->close();
+
+            // Output the message
+            echo $message;
         }
-    } else {
-        $message = "Please fill in all fields.";
-    }
-}
+
 ?>
