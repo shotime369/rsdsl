@@ -40,8 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
             $conn->close();
 
-            // Output the message
-            echo $message;
+                // Pass the message to JavaScript
+                echo "<script>
+                    alert('" . addslashes($message) . "');
+                    window.location.href = 'notes.html'; // Reload the page
+                </script>";
+
+                exit();
+
         }
 
 ?>
