@@ -1,10 +1,11 @@
 <?php
-// Database connection
-$host = 'localhost';
-$dbname = 'notes_app';
-$username = 'root';
-$password = '';
+// Database connection settings
+$servername = "localhost";
+$username = "root";
+$password = "P@ssw0rd";
+$dbname = "loginweb";
 
+//try connection
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -12,10 +13,10 @@ try {
     die("Database connection failed: " . $e->getMessage());
 }
 
-// Initialize variables
+// initialize variables
 $message = "";
 
-// Handle form submission
+// get user input from form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'] ?? '';
     $content = $_POST['content'] ?? '';
@@ -23,11 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($title) && !empty($content)) {
         $timestamp = date('Y-m-d H:i:s');
 
-        // Insert into the database
-        $stmt = $pdo->prepare("INSERT INTO notes (title, content, created_at) VALUES (:title, :content, :created_at)");
+        // insert into the database title, content, timestamp
+        $stmt = $pdo->prepare("INSERT INTO notes (title, content, date_time) VALUES (:title, :content, :date_time)");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':created_at', $timestamp);
+        $stmt->bindParam(':date_time', $timestamp);
 
         if ($stmt->execute()) {
             $message = "Note saved successfully!";
