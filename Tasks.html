@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks</title>
+  <link rel="stylesheet" href="tabStyle.css">
+</head>
+<body>
+<h1>Tasks</h1>
+<?php if (!empty($message)): ?>
+<p class="message"><?= htmlspecialchars($message) ?></p>
+<?php endif; ?>
+<form method="POST" action="saveTask.php">
+  <input type="text" name="task" placeholder="Task" required>
+  <textarea name="details" placeholder="Any extra details" rows="2"></textarea>
+  <input type="date" name="dueDate" required>
+  <button type="submit">Save Task to Calendar</button>
+</form>
+
+
+
+</body>
+</html>

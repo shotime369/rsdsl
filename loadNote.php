@@ -1,5 +1,6 @@
 <?php
 //test code to pull from the notes
+//these aren't working yet
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -14,7 +15,7 @@ $dbname = "loginweb";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 
-//timestamp values
+//timestamp for testing
 $timestamp = "2025-01-22 10:00:00"; // Replace this with values - or value range?
 
 // Check connection
