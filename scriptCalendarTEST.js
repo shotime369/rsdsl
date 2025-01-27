@@ -75,13 +75,18 @@ function renderCalendar(month, year, tasks = {}) {
                     cell.classList.add('today'); // Highlight the current day
                 }
 
-                // Add event markers if there are tasks for this date
+                // Add tasks
                 if (tasks[date]) {
                     tasks[date].forEach(task => {
-                        const marker = document.createElement('div');
-                        marker.classList.add('event-marker');
-                        marker.title = `Task: ${task}`;
-                        cell.appendChild(marker);
+                        const taskText = document.createElement('div');
+                        taskText.classList.add('task-text'); // Create a div for the task text
+                        taskText.textContent = task; // Set the task text
+
+                        taskText.style.fontSize = '12px'; // Smaller font size for task description
+                        taskText.style.marginTop = '4px'; // Add some space between the date and the task text
+
+                        // Append the task text under the date number
+                        cell.appendChild(taskText);
                     });
                 }
 
