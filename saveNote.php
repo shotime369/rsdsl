@@ -23,9 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-    // Prepare SQL statement - notesID is set to auto-increment so isn't included
+    // Prepare SQL statement - notesID is set to auto-increment so isn't included, date_time also auto timestamp
    $stmt = $conn->prepare("INSERT INTO notes (title, content) VALUES (?, ?)");
-     $stmt->bind_param("sss", $title, $content);
+   //bind parameters - s is string
+     $stmt->bind_param("ss", $title, $content);
 
         // Execute the statement and check for success
         if ($stmt->execute()) {
@@ -38,11 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
             $conn->close();
 
-                // Pass the message to JavaScript
-                echo "<script>
-                    alert('" . addslashes($message) . "');
-                    window.location.href = 'notes.html'; // Reload the page
-                </script>";
+ // Pass the message to JavaScript and reload the page
+    echo "<script>
+        alert('" . addslashes($message) . "');
+        window.location.href = 'notes.php';  // Redirect back to the notes page
+    </script>";
 
                 exit();
 

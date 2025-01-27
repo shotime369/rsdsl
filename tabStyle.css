@@ -6,14 +6,14 @@ body {
 
 h1 {
     font-size: 2.5rem;
-    color: #d76ed7;
+    color: #3d3888;
     margin-bottom: 10px;
     text-align: center;
 }
 
 h2 {
     font-size: 1.5rem;
-    color: #a04ea0;
+    color: #2d3370;
     margin-top: 10px;
 }
 
@@ -35,14 +35,14 @@ input, textarea, button {
 
 button {
     border: none; /* Removes default button borders */
-    background-color: #d76ed7;
+    background-color: #6e73d7;
     color: white;
     cursor: pointer;
 }
 
 
 button:hover {
-    background-color: #61279f;
+    background-color: #1e3293;
 }
 .message {
     text-align: center;
