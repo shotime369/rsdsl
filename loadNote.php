@@ -24,7 +24,7 @@ if ($conn->connect_error) {
 }
 
     // Prepare SQL statement
-       $stmt = $conn->prepare("SELECT * FROM notes WHERE date_time = ?");
+       $stmt = $conn->prepare("SELECT * FROM notes ORDER BY date_time DESC");
        if ($stmt === false) {
            die("Error preparing statement: " . $conn->error);
        }

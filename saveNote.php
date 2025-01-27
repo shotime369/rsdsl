@@ -22,12 +22,10 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $content = $_POST['content'];
-    //get timestamp
-    $timestamp = date('Y-m-d H:i:s');
 
     // Prepare SQL statement - notesID is set to auto-increment so isn't included
-   $stmt = $conn->prepare("INSERT INTO notes (title, content, timestamp) VALUES (?, ?, ?)");
-     $stmt->bind_param("sss", $title, $content, $timestamp);
+   $stmt = $conn->prepare("INSERT INTO notes (title, content) VALUES (?, ?)");
+     $stmt->bind_param("sss", $title, $content);
 
         // Execute the statement and check for success
         if ($stmt->execute()) {
