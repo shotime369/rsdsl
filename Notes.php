@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="tabStyle.css">
 </head>
 <body>
-<h1>Notes</h1>
+<h1>Daily Notes</h1>
 <?php if (!empty($message)): ?>
 <p class="message"><?= htmlspecialchars($message) ?></p>
 <?php endif; ?>

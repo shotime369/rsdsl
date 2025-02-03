@@ -42,7 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $input_username;
             echo "Login successful! Welcome, " . htmlspecialchars($input_username) . "!";
             //send the user to the home page on login
-            header("Location: home.html");
+            header("Location: home.php");
+
+
             exit();
         } else {
             echo "Invalid username or password.";

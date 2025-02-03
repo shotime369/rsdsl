@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Redirect to login if not logged in
+if (!isset($_SESSION['username'])) {
+    header("Location: index.html");
+    exit();
+}
+
+$username = $_SESSION['username']; // Retrieve username
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,8 +39,7 @@
 <!-- content for each tab -->
 <div class="content">
     <div id="home" class="section">
-        <h2>Home</h2>
-        <p>Welcome to the homepage.</p>
+        <iframe src="dashboard.php" width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
     </div>
 
     <div id="passwords" class="section" style="display: none;">
