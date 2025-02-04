@@ -43,8 +43,7 @@ $username = $_SESSION['username']; // Retrieve username
     </div>
 
     <div id="passwords" class="section" style="display: none;">
-        <h2>Passwords</h2>
-        <p>This is the Passwords section.</p>
+        <iframe src="passwords.php"  width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
     </div>
 
     <div id="calendar" class="section" style="display: none;">

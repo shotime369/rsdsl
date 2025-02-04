@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Login successful
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $input_username;
+            $_SESSION['password_hash'] = $password_hash;
             echo "Login successful! Welcome, " . htmlspecialchars($input_username) . "!";
             //send the user to the home page on login
             header("Location: home.php");
