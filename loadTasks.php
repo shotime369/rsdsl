@@ -23,7 +23,7 @@ $startDate = "$year-$month-01";
 $endDate = "$year-$month-" . date('t', strtotime($startDate)); // Get the last day of the month
 
 // Prepare the SQL query to fetch tasks for the month and year
-$sql = "SELECT task, dueDate FROM tasks WHERE dueDate BETWEEN ? AND ? ORDER BY dueDate";
+$sql = "SELECT task, details, dueDate FROM tasks WHERE dueDate BETWEEN ? AND ? ORDER BY dueDate";
 
 // Prepare the statement
 $stmt = $conn->prepare($sql);
@@ -47,3 +47,4 @@ $conn->close();
 // Return the tasks as JSON
 header('Content-Type: application/json');
 echo json_encode($tasks);
+?>

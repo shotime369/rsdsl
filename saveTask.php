@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
+
 // Database connection settings
 $servername = "localhost";
 $username = "root";
@@ -18,13 +19,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get form data from notes.html
+// Get form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $task = $_POST['task'];
     $details = $_POST['details'];
     $dueDate = $_POST['dueDate'];
 
-    // Prepare SQL statement - notesID is set to auto-increment so isn't included
+    // Prepare SQL statement
     $stmt = $conn->prepare("INSERT INTO tasks (task, details, dueDate) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $task, $details, $dueDate);
 
@@ -41,12 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Pass the message to JavaScript
     echo "<script>
-                    alert('" . addslashes($message) . "');
-                    window.location.href = 'Tasks.html'; // Reload the page
-                </script>";
-
+            alert('" . addslashes($message) . "');
+            window.location.href = 'Calendar.html'; // Reload the page
+          </script>";
     exit();
-
 }
-
 ?>

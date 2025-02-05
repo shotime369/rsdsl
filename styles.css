@@ -111,5 +111,42 @@ select {
     border-radius: 10px;
     text-align: left;
 }
+.event-marker {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    margin: 2px auto;
+  }
+  .task-list {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #555;
+  }
+  
+  .task-item {
+    margin: 2px 0;
+    padding: 2px;
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+  
+  .modal {
+    width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
 
+  .task-item-modal {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
 
