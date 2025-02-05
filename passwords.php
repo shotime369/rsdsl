@@ -6,7 +6,7 @@ include 'includes/dbh.inc.php';
 
 
 // Encryption key 
-$hashed_password = $_SESSION['hashed_password'];
+$hashed_password = $_SESSION['password_hash'];
 $user_id = $_SESSION['user_id'];
 //hash_pbkdf2() uses 100,000 iterations for security. Generates a 32-byte key directly.More secure against brute-force attacks than a simple hash.
 $encryption_key = hash_pbkdf2("sha256", $hashed_password, $user_id, 100000, 32, true);  
