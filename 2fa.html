@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2FA Email Verification</title>
+  <link rel="stylesheet" href="styleRSDSL.css">
+</head>
+<body>
+<div class="container">
+  <h2>Email Verification (2FA)</h2>
+  <!-- Email input field -->
+  <input type="email" id="email" placeholder="Enter your email" required>
+  <!-- Button to send the verification email -->
+  <button id="send-email-btn">Send Verification Email</button>
+</div>
+
+<!-- Load Firebase compat scripts-->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+<!-- Initialize Firebase -->
+<script>
+  // Firebase configuration object (our project credentials)
+  var firebaseConfig = {
+    apiKey: "AIzaSyDeOCnxgKz7WOBq8rjsDz_eJ0hBLqItgD0",
+    authDomain: "rsdsl-dd69d.firebaseapp.com",
+    projectId: "rsdsl-dd69d",
+    storageBucket: "rsdsl-dd69d.firebasestorage.app",
+    messagingSenderId: "660053661119",
+    appId: "1:660053661119:web:c598025d28dadeb917bd0a",
+    measurementId: "G-LQ8LTXB3TX"
+  };
+
+  // Initialize Firebase using the compat version
+  firebase.initializeApp(firebaseConfig);
+  // Create the auth instance
+  window.auth = firebase.auth();
+</script>
+
+<!-- Load custom 2fa.js-->
+<script src="2fa.js"></script>
+</body>
+</html>
