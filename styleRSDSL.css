@@ -1,18 +1,12 @@
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
 body {
     font-family: Arial, sans-serif;
     background-color: white;
     color: #333;
-    padding-top: 60px; /* To account for the fixed navbar */
+    height: 100vh; /* Full viewport height */
+    width: 100vh; /* Full viewport width */
+    overflow: hidden; /* Prevent scrolling */
 }
-
 
 .navbar {
     position: fixed;
@@ -25,7 +19,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
-
+/* Title in Navbar */
 .navbar .title {
     font-size: 24px;
     font-weight: bold;
@@ -33,7 +27,7 @@ body {
     margin-left: 10px;
     margin-right: 200px;
 }
-
+/*links in the navbar */
     .navbar a {
         color: #333;
         text-decoration: none;
@@ -43,13 +37,14 @@ body {
         transition: background-color 0.3s ease;
     }
 
-    .navbar a:hover {
-        background-color: grey;
-        color: white;
-    }
-
+.navbar a:hover {
+    background-color: grey;
+    color: white;
+}
+/* Logout Button in Navbar */
 .navbar .logout-button {
     margin-left: auto;
+    margin-right: 20px;
     background-color: ghostwhite; /* button color */
     color: slategray;
     padding: 10px 15px;
@@ -64,39 +59,24 @@ body {
     background-color: darkslateblue; /* Darker on hover */
 }
 
+.content {
+    width: 100%; /* Ensure content spans full width */
+    height: 100%; /* Full height minus navbar */
 
-    .content {
-        padding: 20px;
-        max-width: 800px;
-        margin: 30px auto 0;
-    }
-
-
-    .section {
-        width: 100%;
-        height: 200vh;
-        margin-bottom: 40px;
-    }
-
-#notes {
-    width: 100%;
-    height: 200vh; /* Adjust height as needed */
 }
+
+/* Section styles */
+.section {
+    height: 100vh;  /* Set height to 100% of the viewport height */
+    width: 100vw;  /* Set width to 100% of the viewport width */
+}
+
 iframe {
-    width: 100%;
-    height: 100%;
+    display: block;  /* iframes are inline by default */
+    height: 100vh;  /* Set height to 100% of the viewport height */
+    width: 100vw;  /* Set width to 100% of the viewport width */
+    border: none; /* Remove default border */
 }
 
-    .section h2 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .section p {
-        font-size: 16px;
-        line-height: 1.5;
-        color: #555;
-    }
 
 

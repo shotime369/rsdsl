@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 session_start();
 // Database connection settings
 $servername = "localhost";
-$username = "root";
-$password = "P@ssw0rd";
+$username = "shona";
+$password = "1234";
 $dbname = "loginweb";
 
 // Connect to the database

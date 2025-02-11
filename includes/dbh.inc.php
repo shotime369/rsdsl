@@ -2,8 +2,8 @@
 // Database connection settings
 $host = 'localhost';
 $dbname = 'loginweb';
-$user = 'root';
-$pass = 'P@ssw0rd';
+$user = 'shona';
+$pass = '1234';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);

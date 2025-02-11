@@ -39,27 +39,27 @@ $username = $_SESSION['username']; // Retrieve username
 <!-- content for each tab -->
 <div class="content">
     <div id="home" class="section">
-        <iframe src="dashboard.php" width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
+        <iframe src="dashboard.php" style="border:none;"></iframe>
     </div>
 
-    <div id="passwords" class="section" style="display: none;">
-        <iframe src="passwords.php"  width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
+    <div id="passwords" class="section">
+        <iframe src="passwords.php"  style="border:none"></iframe>
     </div>
 
-    <div id="calendar" class="section" style="display: none;">
-        <iframe src="calendar.html"  width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
+    <div id="calendar" class="section">
+        <iframe src="calendar.html"  style="border:none"></iframe>
     </div>
 
-    <div id="notes" class="section" style="display: none;">
-        <iframe src="Notes.php" width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
+    <div id="notes" class="section">
+        <iframe src="Notes.php" style="border:none"></iframe>
     </div>
 
-    <div id="tasks" class="section" style="display: none;">
-        <iframe src="Tasks.html" width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
+    <div id="tasks" class="section">
+        <iframe src="Tasks.html" style="border:none"></iframe>
     </div>
 
-    <div id="media" class="section" style="display: none;">
-        <iframe src="getMediaAPI.php" width="100%" height="100%" style="border:none; margin-top: 10px;"></iframe>
+    <div id="media" class="section">
+        <iframe src="getMediaAPI.php" style="border:none"></iframe>
     </div>
 </div>
 

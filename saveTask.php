@@ -5,10 +5,12 @@ error_reporting(E_ALL);
 
 session_start();
 
+$username = $_SESSION['username']; // Retrieve the stored username
+
 // Database connection settings
 $servername = "localhost";
-$username = "root";
-$password = "P@ssw0rd";
+$username = "shona";
+$password = "1234";
 $dbname = "loginweb";
 
 // Connect to the database
@@ -26,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dueDate = $_POST['dueDate'];
 
     // Prepare SQL statement
-    $stmt = $conn->prepare("INSERT INTO tasks (task, details, dueDate) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $task, $details, $dueDate);
+    $stmt = $conn->prepare("INSERT INTO tasks (task, details, username, dueDate) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $task, $details, $username, $dueDate);
 
     // Execute the statement and check for success
     if ($stmt->execute()) {
@@ -43,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Pass the message to JavaScript
     echo "<script>
             alert('" . addslashes($message) . "');
-            window.location.href = 'Calendar.html'; // Reload the page
+            window.location.href = 'Tasks.html'; // Reload the page
           </script>";
     exit();
 }
