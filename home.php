@@ -3,7 +3,7 @@ session_start();
 
 // Redirect to login if not logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: index.html");
+    header("Location: 2fa.html");
     exit();
 }
 

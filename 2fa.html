@@ -3,25 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2FA Email Verification</title>
+  <title>Two-Factor Authentication - Email Verification</title>
   <link rel="stylesheet" href="styleRSDSL.css">
+  <style>
+    /* Additional inline styles for improved appearance */
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ABB1E4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #8A8FD6;
+    }
+    p.instruction {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
   <h2>Email Verification (2FA)</h2>
-  <!-- Email input field -->
+  <p class="instruction">Enter your email below to receive a verification link. After clicking the link, you will be redirected to your home page.</p>
   <input type="email" id="email" placeholder="Enter your email" required>
-  <!-- Button to send the verification email -->
   <button id="send-email-btn">Send Verification Email</button>
 </div>
 
-<!-- Load Firebase compat scripts-->
+<!-- Load Firebase compat scripts as plain scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 
-<!-- Initialize Firebase -->
+<!-- Initialize Firebase and expose auth globally -->
 <script>
-  // Firebase configuration object (our project credentials)
+  // Firebase configuration object (replace with your actual credentials)
   var firebaseConfig = {
     apiKey: "AIzaSyDeOCnxgKz7WOBq8rjsDz_eJ0hBLqItgD0",
     authDomain: "rsdsl-dd69d.firebaseapp.com",
@@ -34,11 +76,11 @@
 
   // Initialize Firebase using the compat version
   firebase.initializeApp(firebaseConfig);
-  // Create the auth instance
+  // Create the auth instance and expose it globally so that 2fa.js can use it
   window.auth = firebase.auth();
 </script>
 
-<!-- Load custom 2fa.js-->
+<!-- Load custom 2fa.js as a plain script -->
 <script src="2fa.js"></script>
 </body>
 </html>

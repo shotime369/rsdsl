@@ -1,10 +1,12 @@
+// This script uses the globally available firebase and window.auth objects
+
 // Add an event listener to the "Send Verification Email" button
 document.getElementById("send-email-btn").addEventListener("click", function() {
     var email = document.getElementById("email").value;
 
     // Define the action code settings for the email link
     var actionCodeSettings = {
-        url: 'http://localhost/rsdsl2/confirm.html', // Replace with your actual redirect URL
+        url: 'http://localhost/rsdsl/home.html', // make sure is not the rsdsl2
         handleCodeInApp: true
     };
 
