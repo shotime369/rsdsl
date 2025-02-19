@@ -79,8 +79,9 @@ $stmt->close();
 
 
 <script>
+    /*get the day for the welcome message*/
     const d = new Date();
-    document.getElementById("today").innerHTML = d.toLocaleDateString();
+    document.getElementById("today").innerHTML = d.toLocaleDateString('en-GB');
 
 /*get one days weather forecast - lat and long set to aberdeen for now*/
     async function fetchWeather() {
