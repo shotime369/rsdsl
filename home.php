@@ -21,20 +21,31 @@ $username = $_SESSION['username']; // Retrieve username
 </head>
 <body>
 <!-- the javascript code for the menu tabs -->
-<script src="scriptRSDSL.js"></script>
+<script src="scriptMenu.js"></script>
 
-<!-- menu tabs -->
+<!-- Navigation Menu -->
 <div class="navbar">
     <img src="LVlogo.png" alt="LifeVault Logo" width="50px" height="50px">
     <span class="title">Life Vault</span>
     <a href="#home" onclick="showSection('home')">Home</a>
     <a href="#passwords" onclick="showSection('passwords')">Passwords</a>
-    <a href="#calendar" onclick="showSection('calendar')">Calendar</a> <!-- Redirects to calendar.html -->
+    <a href="#calendar" onclick="showSection('calendar')">Calendar</a>
     <a href="#notes" onclick="showSection('notes')">Notes</a>
     <a href="#tasks" onclick="showSection('tasks')">Tasks</a>
-    <a href="#media" onclick="showSection('media')">Media</a>
+
+    <!-- Dropdown for Media -->
+    <div class="dropdown">
+        <button onclick="dropFunction()" class="dropbtn">Media</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#movies" onclick="showSection('movies')">Movies</a>
+            <a href="#tv" onclick="showSection('tv')">TV Shows</a>
+        </div>
+    </div>
+
     <a href="logout.php" class="logout-button">Logout</a>
 </div>
+
+
 
 <!-- content for each tab -->
 <div class="content">
@@ -58,8 +69,12 @@ $username = $_SESSION['username']; // Retrieve username
         <iframe src="Tasks.html" style="border:none"></iframe>
     </div>
 
-    <div id="media" class="section">
-        <iframe src="getMediaAPI.php" style="border:none"></iframe>
+    <div id="movies" class="section">
+        <iframe src="Movies.php" style="border:none"></iframe>
+    </div>
+
+    <div id="tv" class="section">
+        <iframe src="TV.php" style="border:none"></iframe>
     </div>
 </div>
 

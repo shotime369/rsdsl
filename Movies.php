@@ -6,10 +6,13 @@ $cache_time = 86400; // 24 hours
 $today = new DateTime();  // Current date
 $three_months_later = (new DateTime())->modify('+3 months')->format('Y-m-d');  // Date 3 months from now
 
+//use cache if it exists and is less than 24 hours old
 if (file_exists($cache_file) && (time() - filemtime($cache_file)) < $cache_time) {
     $data = json_decode(file_get_contents($cache_file), true);
 } else {
+    //our API key from TMDB
     $api_key = "c82ebf9717a12eb247071bb5ec8168f2";
+    //the request URL for upcoming movies
     $api_url = "https://api.themoviedb.org/3/discover/movie?api_key=$api_key&language=en-GB&region=GB&primary_release_date.gte=" . $today->format('Y-m-d') . "&primary_release_date.lte=$three_months_later";
     $response = file_get_contents($api_url);
     file_put_contents($cache_file, $response);

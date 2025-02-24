@@ -26,14 +26,14 @@ p{
     margin-top: 2px;
 }
 
-#movies {
+#movies, #tv-shows {
     display: flex;
     flex-wrap: wrap; /* Makes sure movies wrap if there's no space */
     gap: 10px;        /* Adds spacing between movie items */
     justify-content: center;
 }
 
-.movie { margin: 5px;
+.movie, .tv-show { margin: 5px;
     padding: 5px;
     border: 1px solid rgba(255, 212, 60, 0.29);
     display: inline-block;
@@ -41,7 +41,8 @@ p{
     background: rgba(0, 0, 0, 0.79);
 }
 
-.movie img { width: auto;
+.movie img, .tv-show img {
+    width: auto;
     height: 150px;
     object-fit: cover; /* Crops image if it's too big */}
 
