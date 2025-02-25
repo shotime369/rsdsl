@@ -64,14 +64,29 @@ $stmt->close();
         </ul>
     </div>
 
-    <!-- Upcoming Media Section (Replaces Password Reminder) -->
+    <!-- Upcoming Media -->
     <div class="box-blue">
-        <h3>Upcoming Media</h3>
-        <div class="upcoming-media">
-            <ul>
-           
-            </ul>
-        </div>
+            <h3>Upcoming Media</h3>
+            <div class="upcoming-media">
+                <ul>
+                    <?php
+                    $media_sql = "SELECT title, release_date FROM media WHERE username = ? ORDER BY release_date ASC LIMIT 3";
+                    $stmt = $conn->prepare($media_sql);
+                    $stmt->bind_param("s", $username);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                        echo "<li><strong>" . htmlspecialchars($row['title']) . "</strong> - " . date("d-m-Y", strtotime($row['release_date'])) . "</li>";
+                    }
+                } else {
+                    echo "<li>No upcoming media</li>";
+                }
+                $stmt->close();
+                ?>
+                </ul>
+            </div>
     </div>
 
     <div class="box-purple2">
