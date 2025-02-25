@@ -40,10 +40,9 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="dashStyle.css">
-     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body style="margin-top: 50px;" >
-
 
 <div class="box-welcome">
     <h1>Welcome <?php echo htmlspecialchars($username); ?></h1>
@@ -52,79 +51,110 @@ $stmt->close();
 </div>
 
 <div class="grid-container">
-<div class="box-blue">
-    <h3>Today's Tasks</h3>
-    <ul>
-<?php if (empty($tasks)): ?>
-    <li>No tasks today</li>
-<?php else: ?>
-    <?php foreach ($tasks as $task): ?>
-        <li><?php echo htmlspecialchars($task); ?></li>
-    <?php endforeach; ?>
-<?php endif; ?>
+    <div class="box-blue">
+        <h3>Today's Tasks</h3>
+        <ul>
+            <?php if (empty($tasks)): ?>
+                <li>No tasks today</li>
+            <?php else: ?>
+                <?php foreach ($tasks as $task): ?>
+                    <li><?php echo htmlspecialchars($task); ?></li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+    </div>
 
-    </ul>
-</div>
+    <!-- Upcoming Media Section (Replaces Password Reminder) -->
+    <div class="box-blue">
+        <h3>Upcoming Media</h3>
+        <div class="upcoming-media">
+            <ul>
+           
+            </ul>
+        </div>
+    </div>
 
-<div class="box-blue">
-    <h3>Password Reminders</h3>
-    <p>password countdown?</p>
-</div>
-<div class="box-purple2">
-        <h3>Local Weather - Aberdeen</h3>
-    <div id="weather" class="weather-container"></div>
-</div>
-</div>
+    <div class="box-purple2">
+        <h3>Local Weather</h3>
+            
+        <!-- Search Bar & Button -->
+        <div class="weather-search">
+            <input type="text" id="city-input" placeholder="Enter city name">
+            <button id="search-btn">Search</button>
+        </div>
+        <!-- Weather Display -->
+        <div id="weather" class="weather-container"></div>
+    </div>
 
-
+</div>
 
 <script>
-    /*get the day for the welcome message*/
+    /* Get the day for the welcome message */
     const d = new Date();
     document.getElementById("today").innerHTML = d.toLocaleDateString('en-GB');
 
-/*get one days weather forecast - lat and long set to aberdeen for now*/
-    async function fetchWeather() {
-      const url = 'https://api.open-meteo.com/v1/forecast?latitude=57.13&longitude=2.09&hourly=temperature_2m,weather_code&timezone=GMT&forecast_days=2';
-      try {
-        const response = await axios.get(url);
-        const data = response.data;
-        const container = document.getElementById('weather');
-        container.innerHTML = '';
+    async function fetchWeather(lat = 57.13, lon = -2.09) {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code&timezone=GMT&forecast_days=2`;
+        try {
+            const response = await axios.get(url);
+            const data = response.data;
+            const container = document.getElementById('weather');
+            container.innerHTML = '';
 
- const now = new Date();
- const localTimeIndex = data.hourly.time.findIndex(t => new Date(t) >= now);
+            const now = new Date();
+            const localTimeIndex = data.hourly.time.findIndex(t => new Date(t) >= now);
 
- data.hourly.time.slice(localTimeIndex, localTimeIndex + 12).forEach((time, index) => {
-          const temp = data.hourly.temperature_2m[index];
-          const code = data.hourly.weather_code[index];
-          const icon = getWeatherIcon(code);
-          container.innerHTML += `
-            <div class="weather-card">
-              <h4>${new Date(time).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</h3>
-              <img src="${icon}" alt="Weather icon">
-              <p>${temp}°C</p>
-            </div>`;
-        });
-      } catch (error) {
-        console.error('Failed to fetch weather data:', error);
-      }
+            data.hourly.time.slice(localTimeIndex, localTimeIndex + 12).forEach((time, index) => {
+                const temp = data.hourly.temperature_2m[index];
+                const code = data.hourly.weather_code[index];
+                const icon = getWeatherIcon(code);
+                container.innerHTML += `
+                    <div class="weather-card">
+                        <h4>${new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h4>
+                        <img src="${icon}" alt="Weather icon">
+                        <p>${temp}°C</p>
+                    </div>`;
+            });
+        } catch (error) {
+            console.error('Failed to fetch weather data:', error);
+        }
+    }
+
+    async function getCoordinates(city) {
+        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`;
+        try {
+            const response = await axios.get(url);
+            if (response.data.results && response.data.results.length > 0) {
+                const { latitude, longitude } = response.data.results[0];
+                fetchWeather(latitude, longitude);
+            } else {
+                alert('City not found. Please enter a valid city name.');
+            }
+        } catch (error) {
+            console.error('Failed to fetch coordinates:', error);
+        }
     }
 
     function getWeatherIcon(code) {
-      const icons = {
-        0: 'images/icons8-sun-50.png', // Clear
-        1: 'images/icons8-haze-50.png', // Mainly clear
-        2: 'images/icons8-partly-cloudy-day-50.png', // Partly cloudy
-        3: 'images/icons8-cloud-50.png', // Overcast
-        61: 'images/icons8-heavy-rain-50.png', // Rain
-      };
-      return icons[code] || 'images/icons8-partly-cloudy-day-50.png';
+        const icons = {
+            0: 'images/icons8-sun-50.png',
+            1: 'images/icons8-haze-50.png',
+            2: 'images/icons8-partly-cloudy-day-50.png',
+            3: 'images/icons8-cloud-50.png',
+            61: 'images/icons8-heavy-rain-50.png',
+        };
+        return icons[code] || 'images/icons8-partly-cloudy-day-50.png';
     }
 
-    fetchWeather();
-    setInterval(fetchWeather, 3600000); // Refresh every hour
+    document.getElementById('search-btn').addEventListener('click', () => {
+        const city = document.getElementById('city-input').value.trim();
+        if (city) {
+            getCoordinates(city);
+        }
+    });
 
+    fetchWeather();
+    setInterval(fetchWeather, 3600000); // Refreshes hourly
 </script>
 
 </body>

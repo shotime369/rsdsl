@@ -6,7 +6,6 @@ body {
     padding: 0;
 }
 
-
 h3 {
     margin-bottom: 8px; /* Adjust this value as needed */
 }
@@ -17,69 +16,97 @@ div {
     border-radius: 10px;
     color: #000000;
     font-family: Arial, sans-serif;
-
 }
 
 .box-welcome {
     background-color: transparent;
     color: #a78aff;
-    display: flex;              /* Enable flexbox */
-    justify-content: center;    /* Center horizontally */
-    align-items: center;        /* Center vertically */
-    flex-direction: column; /* Arrange elements in a column */
-    gap: 10px; /* Add space between elements */
-
-
+    display: flex;            
+    justify-content: center;  
+    align-items: center;      
+    flex-direction: column;   
+    gap: 10px; 
 }
 
 /* Container for the grid */
 .grid-container {
-    display: grid;                   /* Enable grid layout */
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 10px;                        /* Space between grid items */
-    justify-items: center;            /* Center items horizontally */
-    align-items: center;              /* Center items vertically */
-    padding: 10px;                    /* Add padding around the grid */
+    display: grid;                    
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;                       
+    justify-items: center;           
+    align-items: center;              
+    padding: 10px;                    
 }
 
 /* Styles for individual boxes */
-.box-blue{
-    background-color: #CCE6FFFF;/*for browsers that do not support gradients */
+.box-blue {
+    background-color: #CCE6FFFF;
     background-image: linear-gradient(to bottom right, #cce6ff, #90b2d3);
-    box-shadow: 5px 10px 18px #000000; /* Drop shadow */
+    box-shadow: 5px 10px 18px #000000;
     border: outset thin #e0fffa;
-    border-radius: 5px;               /* Optional: rounded corners */
-    width: 95%;                       /* Make the box take up full width of grid cell */
-    max-width: 90%;                  /* Limit the max width of the box */
+    border-radius: 5px;             
+    width: 95%;                     
+    max-width: 90%;                  
     height: 150px;
-    padding: 20px;                     /* Add some padding inside the boxes */
-    text-align: center;                /* Center the content inside the box */
+    padding: 20px;                   
+    text-align: center;              
 }
 
 /* Adjust the color for the purple box for weather */
 .box-purple2 {
-    background-color: #DAC6FFFF;/*for browsers that do not support gradients */
+    background-color: #DAC6FFFF;
     background-image: linear-gradient(to bottom right, #dac6ff, #b397e4);
-    box-shadow: 5px 10px 18px #000000; /* Drop shadow */
+    box-shadow: 5px 10px 18px #000000;
     border: outset thin #e0fffa;
-    border-radius: 5px;               /* Optional: rounded corners */
-    width: 96.5%;                       /* Make the box take up full width of grid cell */
-    max-width: 100%;                  /* Limit the max width of the box */
+    border-radius: 5px;              
+    width: 96.5%;                    
+    max-width: 100%;                  
     height: fit-content;
-    padding: 5px;                     /* Add some padding inside the boxes */
-    text-align: center;                /* Center the content inside the box */
+    padding: 5px;                    
+    text-align: center;               
     grid-column: span 2;
 }
 
-.weather-container { margin-top: 0;
+/* Weather display */
+.weather-container {
+    margin-top: 0;
     padding: 0;
     display: flex;
     height: 130px;
     justify-content: center;
     align-items: center;
     background: transparent;
-    gap:2px; /* gap between weather times */}
-.weather-card { display: flex; flex-direction: column; align-items: center; background: transparent}
+    gap: 2px;
+}
 
+.weather-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
 
-img { width: 50px; height: 50px; }
+/* Search input and button styling */
+.weather-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#city-input {
+    width: 70%;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #a0c4ff;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #d7e3fc, #a0c4ff);
+    color: #333;
+    text-align: center;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+}
