@@ -4,7 +4,7 @@ session_start();
 // Redirect to login if not logged in
 if (!isset($_SESSION['username'])) {
     header("Location: 2fa.html");
-    exit();
+   exit();
 }
 
 $username = $_SESSION['username']; // Retrieve username
@@ -41,7 +41,7 @@ $username = $_SESSION['username']; // Retrieve username
             <a href="#tv" onclick="showSection('tv')">TV Shows</a>
         </div>
     </div>
-
+    <a href="account.php" onclick="showSection('account')">Account</a>
     <a href="logout.php" class="logout-button">Logout</a>
 </div>
 
@@ -75,6 +75,9 @@ $username = $_SESSION['username']; // Retrieve username
 
     <div id="tv" class="section">
         <iframe src="TV.php" style="border:none"></iframe>
+    </div>
+    <div id="account" class="section">
+        <iframe src="account.php" style="border:none"></iframe>
     </div>
 </div>
 
