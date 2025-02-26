@@ -1,0 +1,199 @@
+/* Prevent page from becoming unnecessarily long */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Center content properly */
+body {
+    min-height: 100vh;
+    padding-top: 60px; /* Adjust based on your navbar height */
+    display: flex;
+    flex-direction: column;
+    
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #3d3888;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #2d3370;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Form styling */
+form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Table styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Center table with a fixed max-width */
+table {
+    max-width: 800px; /* Adjust width as needed */
+    width: 100%;
+    margin: 0 auto; /* Centers the table */
+    padding: 10px;
+}
+
+/* Let the form have its natural width but still centered */
+form {
+    width: auto; /* Keeps form size natural */
+    max-width: 400px; /* Adjust as needed */
+    margin: 0 auto; /* Centers the form */
+    padding: 10px;
+}
+
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+
+/* Modal Styling */
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%; /* Adjust size */
+    height: 30%; /* 40% of the viewport height */
+    max-width: 500px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    z-index: 1001;
+}
+
+/* Modal Grid Layout */
+
+.modal-content {
+    display: flex;
+    flex-direction: column; /* Stack everything vertically */
+    gap: 20px; /* Add spacing between elements */
+    align-items: stretch; /* Make inputs take full width */
+}
+
+.modal-content .form-group {
+    margin-bottom: 15px; /* Increase vertical spacing between elements */
+}
+
+.modal-content label {
+    display: block; /* Ensures the label is on its own line */
+    margin-bottom: 10px; /* Adds spacing between label and input */
+    font-size: 16px; /* Increase label font size */
+    font-weight: bold;
+}
+
+.modal-content input {
+    font-size: 14px; /* Increase text size */
+    padding: 8px; /* Increase padding for a larger field */
+    height: 25px; /* Make inputs taller */
+    width: 100%; /* Ensure inputs take full width */
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Modal Header */
+.modal-header {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Close Button */
+.close {
+    font-size: 24px;
+    cursor: pointer;
+
+}
+
+/* Edit Button */
+.edit-btn, #updateBtn {
+    width: auto; /* Prevent full-width */
+    max-width: 150px; /* Adjust as needed */
+    display: block; /* Ensures it doesn't stretch */
+    margin: 10px auto; /* Centers the button */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #007BFF;
+    color: white;
+
+}
+
+#updateBtn {
+background-color: #28a745;
+color: white;
+display: none; /* Initially hidden */
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Show modal */
+.modal.active,
+.modal-overlay.active {
+    display: block;
+}
+
+input.view-mode {
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+input.edit-mode {
+    border: 2px solid #ccc;
+    background: white;
+}
