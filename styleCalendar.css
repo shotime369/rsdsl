@@ -147,6 +147,7 @@ select {
 
 /* Modal Styles */
 .modal {
+    color: black;
     display: none;
     position: fixed;
     top: 50%;
@@ -157,10 +158,41 @@ select {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     border-radius: 8px;
+    width: 350px;
+    overflow-y: auto;
+    max-height: 400px;
 }
+
+/* Ensure form fields stack vertically */
+.modal form {
+    display: flex;
+    flex-direction: column; /* Makes elements stack */
+    gap: 10px; /* Adds spacing between inputs */
+}
+
+.modal h3 {
+    text-align: left ;
+}
+.modal h4{
+    text-align: left ;
+}
+
+/* Style input fields */
+.modal input,
+.modal textarea,
+.modal button {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
 .modal.open {
     display: block;
 }
+/* Overlay to blur background when modal is open */
 .overlay {
     display: none;
     position: fixed;
@@ -171,11 +203,31 @@ select {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+
 .overlay.open {
     display: block;
 }
-.task-list {
-    margin-top: 5px;
-    font-size: 12px;
-    color: #555;
+
+/* Style each task item */
+.task-item-modal {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Style the "No tasks" message */
+.no-tasks {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    padding: 10px;
+}
+
+
+
+

@@ -115,11 +115,17 @@ function openModal(date) {
       tasks.forEach(task => {
         const taskItem = document.createElement('div');
         taskItem.classList.add('task-item-modal');
-        taskItem.innerHTML = `<strong>${task.task}</strong><br>${task.details}`;
+
+        taskItem.innerHTML = `
+                <strong>${task.task}</strong>
+                <p>${task.details}</p>
+            `;
+
+
         taskListModal.appendChild(taskItem);
       });
     } else {
-      taskListModal.innerHTML = '<p>No tasks for this day.</p>';
+      taskListModal.innerHTML = '<p class="no-tasks">No tasks for this day.</p>';
     }
   });
 
