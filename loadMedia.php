@@ -1,24 +1,36 @@
+
 <?php
+session_start();
 
-// Include the Database class to handle the connection
-require_once 'Database.php';
+// Database connection settings
+$servername = "localhost";
+$username = "shona";
+$password = "1234";
+$dbname = "loginweb";
 
-session_start(); // Ensure the session is started to access the username
+// Connect to the database
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Retrieve the username from session
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$month = $_GET['month'];
+$year = $_GET['year'];
 $username = $_SESSION['username'];
 
-// Use the Database class to get the PDO instance
-$pdo = Database::getInstance();
+$sql = "SELECT title, release_date FROM media WHERE MONTH(release_date) = ? AND YEAR(release_date) = ? AND username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("iis", $month, $year, $username);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Prepare and execute the query to fetch media for the specific username
-$stmt = $pdo->prepare("SELECT title, release_date FROM media WHERE username = :username");
-$stmt->execute(['username' => $username]);
+$movies = [];
+while ($row = $result->fetch_assoc()) {
+    $movies[] = $row;
+}
 
-// Fetch all results as an associative array
-$media = $stmt->fetchAll();
+echo json_encode($movies);
 
-// Return the result as JSON
-echo json_encode($media);
-?>
 

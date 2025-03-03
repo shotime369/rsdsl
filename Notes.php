@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes</title>
-    <link rel="stylesheet" href="tabStyle.css">
+    <link rel="stylesheet" href="styleTab.css">
 </head>
 <body>
 <h1>Daily Notes</h1>

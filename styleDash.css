@@ -2,7 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #4e2d70, #020a2e);
     color: #ffffff;
-    margin: 0;
+    margin: 50px 0 0;
     padding: 0;
 }
 
@@ -93,6 +93,7 @@ div {
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+    border: none;
 }
 
 #city-input {
@@ -104,6 +105,21 @@ div {
     background: linear-gradient(to bottom right, #d7e3fc, #a0c4ff);
     color: #333;
     text-align: center;
+}
+
+button {
+    border: none;
+    background-color: #6e73d7;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1e3293;
 }
 
 img {

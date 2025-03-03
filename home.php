@@ -17,7 +17,7 @@ $username = $_SESSION['username']; // Retrieve username
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Life Vault</title>
-    <link rel="stylesheet" href="styleRSDSL.css">
+    <link rel="stylesheet" href="styleNavigation.css">
 </head>
 <body>
 <!-- the javascript code for the menu tabs -->

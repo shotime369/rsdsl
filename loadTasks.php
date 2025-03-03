@@ -47,4 +47,3 @@ $conn->close();
 // Return the tasks as JSON
 header('Content-Type: application/json');
 echo json_encode($tasks);
-?>

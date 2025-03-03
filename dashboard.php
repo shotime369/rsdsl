@@ -39,10 +39,10 @@ $stmt->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="dashStyle.css">
+    <link rel="stylesheet" href="styleDash.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body style="margin-top: 50px;" >
+
 
 <div class="box-welcome">
     <h1>Welcome <?php echo htmlspecialchars($username); ?></h1>
