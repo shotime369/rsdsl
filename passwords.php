@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login_name = htmlspecialchars($_POST['login_name']);
     $password = encryptPassword($_POST['password'], $encryption_key);
     $notes = htmlspecialchars($_POST['notes']);
-    $created_at = htmlspecialchars($_POST['created_at']);
-    $updated_at = htmlspecialchars($_POST['updated_at']);
+    //$created_at = htmlspecialchars($_POST['created_at']);
+    //$updated_at = htmlspecialchars($_POST['updated_at']);
 
     if (!empty($service_name) && !empty($password) && !empty($login_name)) {
 
