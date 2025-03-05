@@ -70,7 +70,7 @@ $stmt->close();
             <div class="upcoming-media">
                 <ul>
                     <?php
-                    $media_sql = "SELECT title, release_date FROM media WHERE username = ? ORDER BY release_date ASC LIMIT 3";
+                    $media_sql = "SELECT title, release_date FROM media WHERE username = ? AND release_date >= CURDATE() ORDER BY release_date ASC LIMIT 3";
                     $stmt = $conn->prepare($media_sql);
                     $stmt->bind_param("s", $username);
                     $stmt->execute();
