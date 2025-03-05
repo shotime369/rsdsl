@@ -10,7 +10,7 @@ body {
     padding-top: 60px; /* Adjust based on your navbar height */
     display: flex;
     flex-direction: column;
-    
+
     font-family: Arial, sans-serif;
 }
 
@@ -49,6 +49,12 @@ form {
 }
 
 /* Table styling */
+.table-container {
+    display: flex;
+    justify-content: center; /* Centers table horizontally */
+}
+
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -57,11 +63,16 @@ table {
 
 /* Center table with a fixed max-width */
 table {
-    max-width: 800px; /* Adjust width as needed */
-    width: 100%;
+    max-width: 1200px; /* Adjust width as needed */
+
     margin: 0 auto; /* Centers the table */
     padding: 10px;
 }
+table, th, td {
+    color: black;
+}
+
+
 
 /* Let the form have its natural width but still centered */
 form {
@@ -84,90 +95,112 @@ th {
 
 
 /* Modal Styling */
-/* Modal Styling */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%; /* Adjust size */
-    height: 30%; /* 40% of the viewport height */
-    max-width: 500px;
+    width: min(90%, 500px); /* Responsive width */
+    height: min(80vh, 550px); /* Responsive height */
     background: #fff;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    padding: 20px;
+    padding: 5px;
     z-index: 1001;
+    overflow: auto; /* Allow scrolling if needed */
 }
 
-/* Modal Grid Layout */
-
+/* Modal Content */
 .modal-content {
     display: flex;
-    flex-direction: column; /* Stack everything vertically */
-    gap: 20px; /* Add spacing between elements */
-    align-items: stretch; /* Make inputs take full width */
+    flex-direction: column;
+    gap: 15px;
 }
 
+/* Form Group */
 .modal-content .form-group {
-    margin-bottom: 15px; /* Increase vertical spacing between elements */
+    margin-bottom: 10px;
 }
 
+/* Label */
 .modal-content label {
-    display: block; /* Ensures the label is on its own line */
-    margin-bottom: 10px; /* Adds spacing between label and input */
-    font-size: 16px; /* Increase label font size */
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
     font-weight: bold;
 }
 
+/* Input */
 .modal-content input {
-    font-size: 14px; /* Increase text size */
-    padding: 8px; /* Increase padding for a larger field */
-    height: 25px; /* Make inputs taller */
-    width: 100%; /* Ensure inputs take full width */
+    font-size: 14px;
+    padding: 8px;
+    height: 35px;
+    width: 100%;
     border: 2px solid #ccc;
     border-radius: 5px;
 }
 
 /* Modal Header */
 .modal-header {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
 }
 
+/*grid*/
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+.grid-form label {
+    text-align: left;
+    /* Optional: add some padding if needed */
+    padding: 5px 0;
+}
+.grid-form input,
+.grid-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Make the notes label and textarea span both columns */
+.grid-form .notes-label,
+.grid-form .notes-input {
+    grid-column: 1 / -1;
+}
+
+
 /* Close Button */
 .close {
     font-size: 24px;
     cursor: pointer;
-
+    position: absolute;
+    top: 10px;
+    right: 15px;
 }
 
 /* Edit Button */
-.edit-btn, #updateBtn {
-    width: auto; /* Prevent full-width */
-    max-width: 150px; /* Adjust as needed */
-    display: block; /* Ensures it doesn't stretch */
-    margin: 10px auto; /* Centers the button */
+/* Edit Button */
+.edit-btn {
+    width: auto;
+    max-width: 150px;
+    display: block;
+    margin: 10px auto;
     padding: 10px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-}
-
-.edit-btn {
+    cursor: pointer;margin-left: auto;
+    margin-right: auto;
     background-color: #007BFF;
     color: white;
-
+    /* Ensure no pseudo-element is used for text */
 }
 
-#updateBtn {
-background-color: #28a745;
-color: white;
-display: none; /* Initially hidden */
-}
+
 
 /* Modal Overlay */
 .modal-overlay {
@@ -187,6 +220,7 @@ display: none; /* Initially hidden */
     display: block;
 }
 
+/* Input Modes */
 input.view-mode {
     border: none;
     background: transparent;
@@ -197,3 +231,26 @@ input.edit-mode {
     border: 2px solid #ccc;
     background: white;
 }
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    .modal {
+        width: 90%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .modal-header {
+        font-size: 18px;
+    }
+
+    .modal-content input {
+        font-size: 14px;
+        height: 30px;
+    }
+
+    .edit-btn {
+        width: 100%;
+    }
+}
+

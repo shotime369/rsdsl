@@ -5,11 +5,12 @@ include 'includes/dbh.inc.php';
 // Encryption key
 $hashed_password = $_SESSION['password_hash'];
 $user_id = $_SESSION['user_id'];
+
 $encryption_key = hash_pbkdf2("sha256", $hashed_password, $user_id, 100000, 32, true);
 
 if (isset($_GET['entry_id'])) {
     $entry_id = intval($_GET['entry_id']);
-    $stmt = $pdo->prepare("SELECT service_name, login_name, password_encrypted FROM passwords WHERE entry_id = :entry_id");
+    $stmt = $pdo->prepare("SELECT service_name, login_name, password_encrypted, notes FROM passwords WHERE entry_id = :entry_id");
     $stmt->execute(['entry_id' => $entry_id]);
     $password = $stmt->fetch(PDO::FETCH_ASSOC);
 
