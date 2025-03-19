@@ -1,5 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
+
+require 'mailer.php';
 
 // Database connection settings
 $servername = "localhost";
@@ -22,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     //get the results from the database
-    $stmt = $conn->prepare("SELECT user_id, password_hash FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT user_id, password_hash, email FROM users WHERE username = ?");
     
     //use the account ID to get the account info
     $stmt->bind_param("s", $input_username);
@@ -30,25 +34,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($user_id, $password_hash);
+        $stmt->bind_result($user_id, $password_hash, $email);
         $stmt->fetch();
 
         // Verify the password
         if (password_verify($input_password, $password_hash)) {
             session_regenerate_id(true);
 
-            // Login successful
+            // Generate OTP code (6 digits)
+            $otp = rand(100000, 999999);
+            $_SESSION['otp'] = $otp;
+            $_SESSION['email'] = $email;
             $_SESSION['user_id'] = $user_id;
             $_SESSION['username'] = $input_username;
-            $_SESSION['password_hash'] = $password_hash;
-            echo "Login successful! Welcome, " . htmlspecialchars($input_username) . "!";
-            //send the user to the home page on login
-            header("Location: home.php");
 
+            // Send OTP via email using PHPMailer and Mailtrap
+            $subject = "Your OTP Code";
+            $body = "Your OTP code is: <b>$otp</b>. Please enter this code to complete your login.";
 
-            exit();
+            $result = sendEmail($email, $subject, $body);
+
+            if ($result === true) {
+                // Redirect to OTP verification page
+                header("Location: verify.php");
+                exit();
+            } else {
+                echo "Failed to send OTP email: ". htmlspecialchars($result);
+            }
         } else {
-            echo "Invalid username or password.";
+        echo "Invalid username or password.";
         }
     } else {
         echo "Invalid username or password.";
