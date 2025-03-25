@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="styleTab.css">
 </head>
 <body>
-<h1>Daily Notes</h1>
+<h1>Notes</h1>
+
 <?php if (!empty($message)): ?>
-<p class="message"><?= htmlspecialchars($message) ?></p>
+    <p class="message"> <?= htmlspecialchars($message) ?> </p>
 <?php endif; ?>
+
 <form method="POST" action="saveNote.php">
     <input type="text" name="title" placeholder="Note Title Required" required>
     <textarea name="content" placeholder="Write your note here..." rows="5" required></textarea>
@@ -25,6 +27,7 @@
             <th>Date</th>
             <th>Title</th>
             <th>Content</th>
+            <th>Manage</th>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +36,5 @@
     </table>
 </div>
 
-</body>
-</html>
 </body>
 </html>

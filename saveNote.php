@@ -4,14 +4,17 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
+
+$username = $_SESSION['username']; // Retrieve the stored username
+
 // Database connection settings
 $servername = "localhost";
-$username = "shona";
+$user = "shona";
 $password = "1234";
 $dbname = "loginweb";
 
 // Connect to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $user, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
@@ -24,9 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST['content'];
 
     // Prepare SQL statement - notesID is set to auto-increment so isn't included, date_time also auto timestamp
-   $stmt = $conn->prepare("INSERT INTO notes (title, content) VALUES (?, ?)");
+   $stmt = $conn->prepare("INSERT INTO notes (title, content, username) VALUES (?, ?, ?)");
    //bind parameters - s is string
-     $stmt->bind_param("ss", $title, $content);
+     $stmt->bind_param("sss", $title, $content, $username);
 
         // Execute the statement and check for success
         if ($stmt->execute()) {
