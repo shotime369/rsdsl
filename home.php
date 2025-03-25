@@ -7,6 +7,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+
+require 'includes/dbh.inc.php'; // Database connection file
 $username = $_SESSION['username']; // Retrieve username
 ?>
 
@@ -42,6 +44,25 @@ $username = $_SESSION['username']; // Retrieve username
         </div>
     </div>
     <a href="#account" onclick="showSection('account')">Account</a>
+
+    <!-- Display session username and profile icon -->
+    <?php
+    if (isset($_SESSION['username'])):
+        // Assuming you have a database connection already set up
+        // Replace with your database query to fetch the user details
+        $stmt = $pdo->prepare("SELECT user_icon, username FROM users WHERE username = :username");
+        $stmt->execute(['username' => $_SESSION['username']]);
+        $user = $stmt->fetch();
+
+        if ($user): ?>
+            <div class="user-profile">
+                <!-- Display the user's profile icon from the database -->
+                <img src="<?= htmlspecialchars($user['user_icon'] ?: 'images/profileicon/default-icon.png') ?>" alt="Profile Icon" class="profile-icon">
+                <span class="username"><?= htmlspecialchars($user['username']) ?></span>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
     <a href="logout.php" class="logout-button">Logout</a>
 </div>
 

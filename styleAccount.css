@@ -8,7 +8,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    margin: 0;
+    margin: 50px 0 0;
 }
 
 h2 {
@@ -22,11 +22,19 @@ form {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
     backdrop-filter: blur(8px);
+}
+
+.narrow-form {
+    width: 320px; /* Keeps username and email forms narrow */
+}
+
+.wide-form {
+    width: 100%; /* Makes the icon form wide */
+    max-width: 800px; /* Optional: Add a max-width for larger screens */
 }
 
 label {
@@ -77,6 +85,25 @@ button:hover {
     background: linear-gradient(to bottom right, #c997e4, #a78aff);
     transform: scale(1.05);
 }
+
+.icon-label {
+    display: inline-block; /* Makes the label inline and horizontal */
+    margin-right: 10px; /* Optional: adds space between each icon */
+}
+
+.icons-container {
+    display: flex; /* This arranges the icons horizontally */
+    gap: 10px; /* Space between each icon */
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
 
 
 
