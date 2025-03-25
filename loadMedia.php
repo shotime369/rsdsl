@@ -1,36 +1,37 @@
-
 <?php
 session_start();
 
-// Database connection settings
-$servername = "localhost";
-$username = "shona";
-$password = "1234";
-$dbname = "loginweb";
+// Include database connection file
+require 'includes/dbh.inc.php';
 
-// Connect to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Ensure user is logged in
+if (!isset($_SESSION['username'])) {
+    die("You must be logged in to view this data.");
 }
 
-$month = $_GET['month'];
-$year = $_GET['year'];
+$month = isset($_GET['month']) ? intval($_GET['month']) : date('m');
+$year = isset($_GET['year']) ? intval($_GET['year']) : date('Y');
 $username = $_SESSION['username'];
 
-$sql = "SELECT title, release_date FROM media WHERE MONTH(release_date) = ? AND YEAR(release_date) = ? AND username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("iis", $month, $year, $username);
-$stmt->execute();
-$result = $stmt->get_result();
+try {
+    // Prepare SQL to fetch movies for the logged-in user
+    $sql = "SELECT title, release_date FROM media WHERE MONTH(release_date) = :month AND YEAR(release_date) = :year AND username = :username";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':month', $month, PDO::PARAM_INT);
+    $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
 
-$movies = [];
-while ($row = $result->fetch_assoc()) {
-    $movies[] = $row;
+    // Fetch results
+    $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Return JSON response
+    echo json_encode($movies);
+
+} catch (PDOException $e) {
+    echo json_encode(["error" => "Failed to fetch movies: " . $e->getMessage()]);
 }
+?>
 
-echo json_encode($movies);
 
 
