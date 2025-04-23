@@ -5,19 +5,8 @@ error_reporting(E_ALL);
 
 session_start();
 
-// Database connection settings
-$servername = "localhost";
-$user = "shona";
-$password = "1234";
-$dbname = "loginweb";
-
-// Connect to the database
-$conn = new mysqli($servername, $user, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Include database connection file
+require 'includes/dbh.inc.php';
 
 // Ensure the user is logged in
 if (!isset($_SESSION['username'])) {
@@ -25,30 +14,30 @@ if (!isset($_SESSION['username'])) {
 }
 $username = $_SESSION['username'];
 
-// Handle delete request
+// Handle delete request using PDO
 if (isset($_GET['delete_id'])) {
     $delete_id = intval($_GET['delete_id']);
-    $delete_sql = "DELETE FROM notes WHERE noteID = ? AND username = ?";
-    $stmt = $conn->prepare($delete_sql);
-    $stmt->bind_param("is", $delete_id, $username);
-    if ($stmt->execute()) {
+    $delete_sql = "DELETE FROM notes WHERE noteID = :noteID AND username = :username";
+    $stmt = $pdo->prepare($delete_sql);
+
+    if ($stmt->execute(['noteID' => $delete_id, 'username' => $username])) {
         $message = "Note deleted successfully!";
     } else {
-        $message = "Error deleting note: " . $stmt->error;
+        $errorInfo = $stmt->errorInfo();
+        $message = "Error deleting note: " . $errorInfo[2];
     }
-    $stmt->close();
 }
 
-// SQL query to fetch notes for the logged-in user
-$sql = "SELECT noteID, timestamp, title, content FROM notes WHERE username = ? ORDER BY timestamp DESC";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
+
+// SQL query to fetch notes for the logged-in user using PDO
+$sql = "SELECT noteID, timestamp, title, content FROM notes WHERE username = :username ORDER BY timestamp DESC";
+$stmt = $pdo->prepare($sql);
+$stmt->execute(['username' => $username]);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Output rows of notes
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+if ($rows) {
+    foreach ($rows as $row) {
         echo "<tr>
                 <td>" . htmlspecialchars($row["timestamp"]) . "</td>
                 <td>" . htmlspecialchars($row["title"]) . "</td>
@@ -62,6 +51,4 @@ if ($result->num_rows > 0) {
     echo "<tr><td colspan='4'>No notes found</td></tr>";
 }
 
-// Close connection
-$conn->close();
 ?>
