@@ -9,12 +9,12 @@ $username = $_SESSION['username']; // Retrieve the stored username
 
 // Database connection settings
 $servername = "localhost";
-$username = "shona";
+$user = "shona";
 $password = "1234";
 $dbname = "loginweb";
 
 // Connect to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $user, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {

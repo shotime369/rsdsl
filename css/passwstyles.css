@@ -1,0 +1,256 @@
+/* Prevent page from becoming unnecessarily long */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Center content properly */
+body {
+    min-height: 100vh;
+    padding-top: 60px; /* Adjust based on your navbar height */
+    display: flex;
+    flex-direction: column;
+
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #3d3888;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #2d3370;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Form styling */
+form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Table styling */
+.table-container {
+    display: flex;
+    justify-content: center; /* Centers table horizontally */
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Center table with a fixed max-width */
+table {
+    max-width: 1200px; /* Adjust width as needed */
+
+    margin: 0 auto; /* Centers the table */
+    padding: 10px;
+}
+table, th, td {
+    color: black;
+}
+
+
+
+/* Let the form have its natural width but still centered */
+form {
+    width: auto; /* Keeps form size natural */
+    max-width: 400px; /* Adjust as needed */
+    margin: 0 auto; /* Centers the form */
+    padding: 10px;
+}
+
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90%, 500px); /* Responsive width */
+    height: min(80vh, 550px); /* Responsive height */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    z-index: 1001;
+    overflow: auto; /* Allow scrolling if needed */
+}
+
+/* Modal Content */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Group */
+.modal-content .form-group {
+    margin-bottom: 10px;
+}
+
+/* Label */
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Input */
+.modal-content input {
+    font-size: 14px;
+    padding: 8px;
+    height: 35px;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Modal Header */
+.modal-header {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/*grid*/
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+.grid-form label {
+    text-align: left;
+    /* Optional: add some padding if needed */
+    padding: 5px 0;
+}
+.grid-form input,
+.grid-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Make the notes label and textarea span both columns */
+.grid-form .notes-label,
+.grid-form .notes-input {
+    grid-column: 1 / -1;
+}
+
+
+/* Close Button */
+.close {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+/* Edit Button */
+/* Edit Button */
+.edit-btn {
+    width: auto;
+    max-width: 150px;
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;margin-left: auto;
+    margin-right: auto;
+    background-color: #007BFF;
+    color: white;
+    /* Ensure no pseudo-element is used for text */
+}
+
+
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Show modal */
+.modal.active,
+.modal-overlay.active {
+    display: block;
+}
+
+/* Input Modes */
+input.view-mode {
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+input.edit-mode {
+    border: 2px solid #ccc;
+    background: white;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    .modal {
+        width: 90%;
+        height: auto;
+        padding: 15px;
+    }
+
+    .modal-header {
+        font-size: 18px;
+    }
+
+    .modal-content input {
+        font-size: 14px;
+        height: 30px;
+    }
+
+    .edit-btn {
+        width: 100%;
+    }
+}
+

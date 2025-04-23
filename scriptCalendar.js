@@ -26,7 +26,7 @@ taskForm.addEventListener('submit', saveTask);
 // Render the calendar
 function renderCalendar(month, year) {
   calendarBody.innerHTML = '';
-  monthAndYear.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+  monthAndYear.textContent = `${new Date(year, month).toLocaleString('default', {month: 'long'})} ${year}`;
   monthSelect.value = month;
 
   const firstDay = new Date(year, month, 1).getDay();
@@ -42,8 +42,16 @@ function renderCalendar(month, year) {
       } else if (date > daysInMonth) {
         cell.textContent = '';
       } else {
-        cell.textContent = date;
+        // Create a span for the date number
+        const dateSpan = document.createElement('span');
+        dateSpan.classList.add('date'); //date class for styling
+        dateSpan.textContent = date;
+
+        // Append the date inside the cell
+        cell.appendChild(dateSpan);
         cell.classList.add('date-picker');
+
+        // Highlight today's date
         if (date === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
           cell.classList.add('today');
         }
@@ -54,6 +62,22 @@ function renderCalendar(month, year) {
           selectedDate = cellDate;
           openModal(selectedDate);
         });
+
+        // Fetch media for this date
+        fetchMediaForDate(cellDate).then(media => {
+          if (media.length > 0) {
+            const mediaList = document.createElement('div');
+            mediaList.classList.add('media-list');
+            media.forEach(media => {
+              const mediaItem = document.createElement('div');
+              mediaItem.classList.add('media-item');
+              mediaItem.textContent = media.title;
+              mediaList.appendChild(mediaItem);
+            });
+            cell.appendChild(mediaList);
+          }
+        });
+
 
         // Fetch and display tasks for this date
         fetchTasksForDate(cellDate).then(tasks => {
@@ -91,11 +115,17 @@ function openModal(date) {
       tasks.forEach(task => {
         const taskItem = document.createElement('div');
         taskItem.classList.add('task-item-modal');
-        taskItem.innerHTML = `<strong>${task.task}</strong><br>${task.details}`;
+
+        taskItem.innerHTML = `
+                <strong>${task.task}</strong>
+                <p>${task.details}</p>
+            `;
+
+
         taskListModal.appendChild(taskItem);
       });
     } else {
-      taskListModal.innerHTML = '<p>No tasks for this day.</p>';
+      taskListModal.innerHTML = '<p class="no-tasks">No tasks for this day.</p>';
     }
   });
 
@@ -150,6 +180,12 @@ function changeMonth(delta) {
     currentYear++;
   }
   renderCalendar(currentMonth, currentYear);
+}
+
+async function fetchMediaForDate(date) {
+  const response = await fetch(`loadMedia.php?month=${date.getMonth() + 1}&year=${date.getFullYear()}`);
+  const media = await response.json();
+  return media.filter(media => media.release_date === date.toISOString().split('T')[0]);
 }
 
 // Initial render
