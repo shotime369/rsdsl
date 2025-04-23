@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION['username'])) {
@@ -8,17 +9,9 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username']; // Retrieve the stored username
 
-// Database connection
-$servername = "localhost";
-$dbname = "loginweb";
-$dbusername = "shona";
-$dbpassword = "1234";
 
-$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Include the database connection
+require_once 'db.php';
 
 // Fetch tasks
 $tasks = [];
