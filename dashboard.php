@@ -1,5 +1,9 @@
 <?php
 session_start();
+//simulated user for testing purposes only
+//$_SESSION['username'] = 'testuser'; // comment this line out after testing
+
+require 'includes/dbh.inc.php'; // Database connection file
 
 if (!isset($_SESSION['username'])) {
     header("Location: index.html"); // Redirect to login page if not logged in
@@ -8,29 +12,15 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username']; // Retrieve the stored username
 
-// Database connection
-$servername = "localhost";
-$dbname = "loginweb";
-$dbusername = "shona";
-$dbpassword = "1234";
-
-$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Fetch tasks
 $tasks = [];
-$tasks_sql = "SELECT task FROM tasks WHERE username = ? AND dueDate = CURDATE()";
-$stmt = $conn->prepare($tasks_sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_assoc()) {
+$tasks_sql = "SELECT task FROM tasks WHERE username = :username AND dueDate = CURDATE()";
+$stmt = $pdo->prepare($tasks_sql);
+$stmt->execute(['username' => $username]);
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $tasks[] = $row['task'];
 }
-$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -70,20 +60,18 @@ $stmt->close();
             <div class="upcoming-media">
                 <ul>
                     <?php
-                    $media_sql = "SELECT title, release_date FROM media WHERE username = ? AND release_date >= CURDATE() ORDER BY release_date ASC LIMIT 3";
-                    $stmt = $conn->prepare($media_sql);
-                    $stmt->bind_param("s", $username);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    // Using PDO for fetching media
+                    $media_sql = "SELECT title, release_date FROM media WHERE username = :username AND release_date >= CURDATE() ORDER BY release_date ASC LIMIT 3";
+                    $stmt = $pdo->prepare($media_sql);  // Use $pdo instead of $conn
+                    $stmt->execute(['username' => $username]);
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                        echo "<li><strong>" . htmlspecialchars($row['title']) . "</strong> - " . date("d-m-Y", strtotime($row['release_date'])) . "</li>";
+                    if ($stmt->rowCount() > 0) {
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<li><strong>" . htmlspecialchars($row['title']) . "</strong> - " . date("d-m-Y", strtotime($row['release_date'])) . "</li>";
+                        }
+                    } else {
+                        echo "<li>No upcoming media</li>";
                     }
-                } else {
-                    echo "<li>No upcoming media</li>";
-                }
-                $stmt->close();
                 ?>
                 </ul>
             </div>
