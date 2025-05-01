@@ -5,48 +5,38 @@ error_reporting(E_ALL);
 
 session_start();
 
-$username = $_SESSION['username']; // Retrieve the stored username
+require 'includes/dbh.inc.php';
 
-// Database connection settings
-$servername = "localhost";
-$user = "shona";
-$password = "1234";
-$dbname = "loginweb";
+$username = $_SESSION['username'] ?? null;
 
-// Connect to the database
-$conn = new mysqli($servername, $user, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$username) {
+    die("User not logged in.");
 }
 
-// Get form data
+// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $task = $_POST['task'];
-    $details = $_POST['details'];
-    $dueDate = $_POST['dueDate'];
+    $task = $_POST['task'] ?? '';
+    $details = $_POST['details'] ?? '';
+    $dueDate = $_POST['dueDate'] ?? '';
 
-    // Prepare SQL statement
-    $stmt = $conn->prepare("INSERT INTO tasks (task, details, username, dueDate) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $task, $details, $username, $dueDate);
-
-    // Execute the statement and check for success
-    if ($stmt->execute()) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO tasks (task, details, username, dueDate) VALUES (:task, :details, :username, :dueDate)");
+        $stmt->execute([
+            'task' => $task,
+            'details' => $details,
+            'username' => $username,
+            'dueDate' => $dueDate
+        ]);
         $message = "Task saved successfully!";
-    } else {
-        $message = "Failed to save task: " . $stmt->error;
+    } catch (PDOException $e) {
+        $message = "Failed to save task: " . $e->getMessage();
     }
 
-    // Close the statement and the connection
-    $stmt->close();
-    $conn->close();
-
-    // Pass the message to JavaScript
     echo "<script>
-            alert('" . addslashes($message) . "');
-            window.location.href = 'Tasks.html'; // Reload the page
-          </script>";
+        alert('" . addslashes($message) . "');
+        window.location.href = 'Tasks.html';
+    </script>";
     exit();
 }
 ?>
+

@@ -84,7 +84,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <div class="weather-search">
             <input type="text" id="city-input" placeholder="Enter city name">
             <button id="search-btn">Search</button>
+
         </div>
+        <p id="city-display" style="margin-top: 10px; font-weight: bold;"></p>
         <!-- Weather Display -->
         <div id="weather" class="weather-container"></div>
     </div>
@@ -128,8 +130,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         try {
             const response = await axios.get(url);
             if (response.data.results && response.data.results.length > 0) {
-                const { latitude, longitude } = response.data.results[0];
+                const { latitude, longitude, name, country } = response.data.results[0];
+                document.getElementById('city-display').textContent = `${name}, ${country}`;
                 fetchWeather(latitude, longitude);
+
             } else {
                 alert('City not found. Please enter a valid city name.');
             }
