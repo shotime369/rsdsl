@@ -13,6 +13,9 @@ if (!isset($_SESSION['username'])) {
 
 require 'includes/dbh.inc.php'; // Database connection file
 $username = $_SESSION['username']; // Retrieve username uncomment this line after testing
+
+date_default_timezone_set('London'); // Set timezone to London
+
 ?>
 
 

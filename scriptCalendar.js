@@ -14,6 +14,9 @@ let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
 let selectedDate = null;
 
+
+
+
 // Event listeners
 previousButton.addEventListener('click', () => changeMonth(-1));
 nextButton.addEventListener('click', () => changeMonth(1));
@@ -141,11 +144,17 @@ function closeModal() {
 
 // Fetch tasks for a specific date
 async function fetchTasksForDate(date) {
+  // Format date as YYYY-MM-DD in local time
+  const localDateString = date.toLocaleDateString('en-CA');
+
+  // Fetch tasks for the selected month and year
   const response = await fetch(`loadTasks.php?month=${date.getMonth() + 1}&year=${date.getFullYear()}`);
   const tasks = await response.json();
-  const filteredTasks = tasks.filter(task => task.dueDate === date.toISOString().split('T')[0]);
-  return filteredTasks;
+
+  // Filter tasks
+  return tasks.filter(task => task.dueDate === localDateString);
 }
+
 
 // Save a new task
 async function saveTask(event) {
@@ -183,10 +192,17 @@ function changeMonth(delta) {
 }
 
 async function fetchMediaForDate(date) {
+  // Format date as YYYY-MM-DD in local time
+  const localDateString = date.toLocaleDateString('en-CA'); // e.g., 2025-05-01
+
+  // Fetch media for the selected month and year
   const response = await fetch(`loadMedia.php?month=${date.getMonth() + 1}&year=${date.getFullYear()}`);
   const media = await response.json();
-  return media.filter(media => media.release_date === date.toISOString().split('T')[0]);
+
+  // Filter media
+  return media.filter(item => item.release_date === localDateString);
 }
+
 
 // Initial render
 renderCalendar(currentMonth, currentYear);

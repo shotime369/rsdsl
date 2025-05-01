@@ -42,8 +42,16 @@ $filtered_movies = $data['results'] ?? null;
 if (is_array($filtered_movies)) {
     // Sort filtered movies by release date
     usort($filtered_movies, function ($a, $b) {
-        $dateA = new DateTime($a['release_date']);
-        $dateB = new DateTime($b['release_date']);
+        try {
+            $dateA = new DateTime($a['release_date']);
+        } catch (DateMalformedStringException $e) {
+
+        }
+        try {
+            $dateB = new DateTime($b['release_date']);
+        } catch (DateMalformedStringException $e) {
+
+        }
         return $dateA <=> $dateB;
     });
 } else {
