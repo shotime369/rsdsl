@@ -1,55 +1,42 @@
 <?php
 
+// Include database connection
+require 'includes/dbh.inc.php';
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
 
-$username = $_SESSION['username']; // Retrieve the stored username
+$username = $_SESSION['username'] ?? null; // Retrieve the stored username
 
-// Database connection settings
-$servername = "localhost";
-$user = "shona";
-$password = "1234";
-$dbname = "loginweb";
-
-// Connect to the database
-$conn = new mysqli($servername, $user, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$username) {
+    die("User not logged in.");
 }
 
-// Get form data from notes.html
+// Handle POST request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
+    $title = $_POST['title'] ?? '';
+    $content = $_POST['content'] ?? '';
 
-    // Prepare SQL statement - notesID is set to auto-increment so isn't included, date_time also auto timestamp
-   $stmt = $conn->prepare("INSERT INTO notes (title, content, username) VALUES (?, ?, ?)");
-   //bind parameters - s is string
-     $stmt->bind_param("sss", $title, $content, $username);
+    try {
+        $stmt = $pdo->prepare("INSERT INTO notes (title, content, username) VALUES (:title, :content, :username)");
+        $stmt->execute([
+            'title' => $title,
+            'content' => $content,
+            'username' => $username
+        ]);
 
-        // Execute the statement and check for success
-        if ($stmt->execute()) {
-                $message = "Note saved successfully!";
-            } else {
-                $message = "Failed to save the note: " . $stmt->error;
-            }
+        $message = "Note saved successfully!";
+    } catch (PDOException $e) {
+        $message = "Failed to save the note: " . $e->getMessage();
+    }
 
-            // Close the statement and the connection
-            $stmt->close();
-            $conn->close();
-
- // Pass the message to JavaScript and reload the page
+    // Pass the message to JavaScript and reload the page
     echo "<script>
         alert('" . addslashes($message) . "');
-        window.location.href = 'notes.php';  // Redirect back to the notes page
+        window.location.href = 'notes.php';
     </script>";
-
-                exit();
-
-        }
-
+    exit();
+}
 ?>
