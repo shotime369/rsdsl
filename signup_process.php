@@ -1,19 +1,7 @@
 <?php
 session_start();
 
-// Database connection settings
-$servername = "localhost";
-$username = "shona";
-$password = '1234';
-$dbname = "loginweb";
-
-// Connect to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'includes/dbh.inc.php'; // Include the PDO database connection
 
 // Get form data from signup.html
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,27 +16,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Hash the password - default selects the most up to date hashing algorithm
+    // Hash the password - default selects the most up-to-date hashing algorithm
     $password_hash = password_hash($input_password, PASSWORD_DEFAULT);
 
-    // Prepare SQL statement - user_id is set to auto-increment so isn't included
-    $stmt = $conn->prepare("INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $input_username, $password_hash, $input_email);
+    try {
+        // Prepare SQL statement
+        $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)");
+        $stmt->execute([$input_username, $password_hash, $input_email]);
 
-    // Execute the statement and check for success
-    if ($stmt->execute()) {
         echo "Sign-up successful! You can now log in.";
-    } else {
-        echo "Error: " . $stmt->error;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
-    
-    // Close the statement and the connection
-    $stmt->close();
 }
-
-$conn->close();
 
 header("Location: index.html");
 exit();
-
-  
+?>
