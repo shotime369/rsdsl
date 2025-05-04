@@ -43,7 +43,10 @@ function sendEmail($to, $subject, $body) {
         $mail->Subject = $subject;
         $mail->Body    = $body;
 
-        $mail->send();
+        if (!$mail->send()) {
+            return "Message could not be sent! Mailer Error: {$mail->ErrorInfo}";
+        }
+
         return true;
     } catch (Exception $e) {
         return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
