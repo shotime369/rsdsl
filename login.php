@@ -4,11 +4,12 @@ ini_set('display_errors', 1);
 session_start();
 
 require 'mailer.php';
+require 'includes/dbh.inc.php';
 
 // Database connection settings
 $servername = "localhost";
-$username = "shona";
-$password = "1234";
+$username = "root";
+$password = "P@ssw0rd";
 $dbname = "loginweb";
 
 // Connect to the database
