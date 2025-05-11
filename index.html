@@ -7,26 +7,29 @@
     <link rel="stylesheet" href="indexstyles.css">
 </head>
 <body>
-    <div class="wave"></div>
 
 <div class="login-container">
-    <img src="LVlogo.png" alt="LifeVault Logo" width="200px" height="200px" class="logoindex">
+    <img src="images/LVlogo.png" alt="LifeVault Logo" width="200" height="200" class="logoindex">
     <h1 class="title">Welcome to Life Vault</h1>
+
     <form id="login-form" action="login.php" method="post">
         <div class="input-group">
             <label for="username">Username</label>
-            <!-- add "required" at the end of the username input type to force the user to fill this in -->
             <input type="text" id="username" name="username" required>
         </div>
+
         <div class="input-group">
             <label for="password">Password</label>
-            <!-- add "required" at the end of the password input type to force the user to fill this in -->
             <input type="password" id="password" name="password" required>
         </div>
+
         <button type="submit" class="login-button">Login</button>
     </form>
-    <p class="signup-link" style="text-align: center; margin-top: 30px;">Don't have an account? <a href="signup.html">Sign up here</a></p>
+
+    <p class="login-link">Don't have an account? <a href="signup.html">Sign up here</a></p>
 </div>
+
 </body>
 </html>
+
 

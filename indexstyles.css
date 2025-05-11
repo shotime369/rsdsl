@@ -5,11 +5,8 @@
 html, body {
     height: 100%;
     margin: 0;
-}
-
-body {
     font-family: Arial, sans-serif;
-    background-image: url(wave-purple.svg);
+    background-image: url(images/wave-purple.svg);
     background-color: var(--primary-color);
     background-repeat: no-repeat;
     background-size: cover;
@@ -18,28 +15,32 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
+/* Shared container style */
+.signup-container,
 .login-container {
     background-color: white;
     padding: 20px;
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 360px;
 }
 
+/* Shared logo style */
 .logoindex {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* Shared title style */
 .title {
     text-align: center;
     margin-bottom: 20px;
 }
 
+/* Shared input group style */
 .input-group {
     margin-bottom: 15px;
 }
@@ -49,13 +50,17 @@ label {
     margin-bottom: 5px;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
     width: 94%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
+/* Signup and Login button shared base style */
+.signup-button,
 .login-button {
     width: 100%;
     padding: 10px;
@@ -66,12 +71,28 @@ input[type="text"], input[type="password"] {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-   
 }
 
+.signup-button:hover,
 .login-button:hover {
     background-color: #9CA4E8;
 }
+
+/* Signup specific */
+.login-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login-link a {
+    color: #6B77E6;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
 
 
 
