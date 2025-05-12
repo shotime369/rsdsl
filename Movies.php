@@ -22,7 +22,7 @@ if (file_exists($cache_file) && (time() - filemtime($cache_file)) < $cache_time)
     }
 
     // Log the response for debugging purposes
-    file_put_contents("api_response_log.txt", $response); // Logs the raw response to a file
+   // file_put_contents("api_response_log.txt", $response); // Logs the raw response to a file
 
     // Decode the response
     $data = json_decode($response, true);

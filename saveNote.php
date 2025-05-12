@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Pass the message to JavaScript and reload the page
     echo "<script>
         alert('" . addslashes($message) . "');
-        window.location.href = 'notes.php';
+        window.location.href = 'Notes.php';
     </script>";
     exit();
 }
