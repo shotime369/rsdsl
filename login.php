@@ -35,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username'] = $input_username;
                 $_SESSION['password_hash'] = $password_hash;
 
-
                 // Send OTP via email using PHPMailer and Mailtrap
                 $subject = "Your OTP Code";
                 $body = "Your OTP code is: <b>$otp</b>. Please enter this code to complete your login.";
