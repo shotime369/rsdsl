@@ -22,7 +22,7 @@ if (file_exists($cache_file) && (time() - filemtime($cache_file)) < $cache_time)
     }
 
     // Log the response for debugging purposes
-    file_put_contents("api_response_log.txt", $response); // Logs the raw response to a file
+   // file_put_contents("api_response_log.txt", $response); // Logs the raw response to a file
 
     // Decode the response
     $data = json_decode($response, true);
@@ -42,8 +42,16 @@ $filtered_movies = $data['results'] ?? null;
 if (is_array($filtered_movies)) {
     // Sort filtered movies by release date
     usort($filtered_movies, function ($a, $b) {
-        $dateA = new DateTime($a['release_date']);
-        $dateB = new DateTime($b['release_date']);
+        try {
+            $dateA = new DateTime($a['release_date']);
+        } catch (DateMalformedStringException $e) {
+
+        }
+        try {
+            $dateB = new DateTime($b['release_date']);
+        } catch (DateMalformedStringException $e) {
+
+        }
         return $dateA <=> $dateB;
     });
 } else {

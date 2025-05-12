@@ -2,7 +2,7 @@
 session_start();
 
 //simulated user for testing purposes only
-//$_SESSION['username'] = 'shona2';  comment this line out after testing
+//$_SESSION['username'] = 'testuser'; // comment this line out after testing
 
 // Redirect to login if not logged in
 if (!isset($_SESSION['username'])) {
@@ -12,7 +12,10 @@ if (!isset($_SESSION['username'])) {
 
 
 require 'includes/dbh.inc.php'; // Database connection file
-$username = $_SESSION['username']; // Retrieve username
+$username = $_SESSION['username']; // Retrieve username uncomment this line after testing
+
+date_default_timezone_set('London'); // Set timezone to London
+
 ?>
 
 

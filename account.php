@@ -4,7 +4,7 @@ require 'includes/dbh.inc.php'; // Database connection file
 
 //  user_id is stored in session after login
 if (!isset($_SESSION['user_id'])) {
-  header('Location: login.php'); // Redirect to login if not logged in
+  header('Location: index.html'); // Redirect to login if not logged in
   exit();
 }
 
