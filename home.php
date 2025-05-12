@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-//simulated user for testing purposes only
-//$_SESSION['username'] = 'testuser'; // comment this line out after testing
-
 // Redirect to login if not logged in
 if (!isset($_SESSION['username'])) {
     header("Location: index.html");
@@ -12,9 +9,9 @@ if (!isset($_SESSION['username'])) {
 
 
 require 'includes/dbh.inc.php'; // Database connection file
-$username = $_SESSION['username']; // Retrieve username uncomment this line after testing
+$username = $_SESSION['username'];
 
-date_default_timezone_set('London'); // Set timezone to London
+date_default_timezone_set('Europe/London'); // Set timezone to London
 
 ?>
 
@@ -33,7 +30,7 @@ date_default_timezone_set('London'); // Set timezone to London
 
 <!-- Navigation Menu -->
 <div class="navbar">
-    <img src="LVlogo.png" alt="LifeVault Logo" width="50px" height="50px">
+    <img src="images/LVlogo.png" alt="LifeVault Logo" width="50px" height="50px">
     <span class="title">Life Vault</span>
     <a href="#home" onclick="showSection('home')">Home</a>
     <a href="#passwords" onclick="showSection('passwords')">Passwords</a>
@@ -54,8 +51,6 @@ date_default_timezone_set('London'); // Set timezone to London
     <!-- Display session username and profile icon -->
     <?php
     if (isset($_SESSION['username'])):
-        // Assuming you have a database connection already set up
-        // Replace with your database query to fetch the user details
         $stmt = $pdo->prepare("SELECT user_icon, username FROM users WHERE username = :username");
         $stmt->execute(['username' => $_SESSION['username']]);
         $user = $stmt->fetch();

@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="wave"></div>
 <div class="login-container">
-<img src="LVlogo.png" alt="LifeVault Logo" width="200px" height="200px" class="logoindex">
+<img src="images/LVlogo.png" alt="LifeVault Logo" width="200px" height="200px" class="logoindex">
 <h1 class="title">Enter OTP</h1>
 
 <?php if (isset($error)) { echo "<p class='error-message'>$error</p>"; } ?>
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 <button type="submit" class="login-button">Verify</button>
 </form>
-<img src="LVlogo.png" alt="LifeVault Logo" width="200px" height="200px" class="logoindex">
+<img src="images/LVlogo.png" alt="LifeVault Logo" width="200px" height="200px" class="logoindex">
 </div>
 </body>
 </html>
