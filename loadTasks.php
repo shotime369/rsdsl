@@ -1,22 +1,39 @@
 <?php
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['username'])) {
+    http_response_code(403);
+    echo json_encode(['error' => 'Unauthorized']);
+    exit();
+}
 
 // Include database connection
 require 'includes/dbh.inc.php';
 
-// Get the month and year from query params or use current
+// Get the current user
+$username = $_SESSION['username'];
+
+// Get month and year from GET parameters or default to current
 $month = isset($_GET['month']) ? (int)$_GET['month'] : date('m');
 $year = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 
-// Prepare date range for the given month
-$startDate = "$year-$month-01";
-$endDate = "$year-$month-" . date('t', strtotime($startDate));
+// Format start and end dates for the given month
+$startDate = sprintf("%04d-%02d-01", $year, $month);
+$endDate = sprintf("%04d-%02d-%02d", $year, $month, date('t', strtotime($startDate)));
 
-// Prepare and execute SQL query using PDO
-$sql = "SELECT task, details, dueDate FROM tasks WHERE dueDate BETWEEN :start AND :end ORDER BY dueDate";
+// Prepare and execute SQL query (assuming 'username' is stored in the 'tasks' table)
+$sql = "SELECT task, details, dueDate FROM tasks
+WHERE username = :username AND dueDate BETWEEN :start AND :end
+ORDER BY dueDate";
+
 $stmt = $pdo->prepare($sql);
-$stmt->execute(['start' => $startDate, 'end' => $endDate]);
+$stmt->execute([
+    'username' => $username,
+    'start' => $startDate,
+    'end' => $endDate,
+]);
 
-// Fetch results
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Return JSON response
